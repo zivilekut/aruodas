@@ -1,6 +1,8 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -67,7 +69,7 @@ public class AruodasTest {
     }
 
     @Test //Registracija su valid data
-    public void test1(){
+    public void test1() {
         driver.get("https://www.aruodas.lt");
         try {
             TimeUnit.SECONDS.sleep(2);
@@ -103,6 +105,38 @@ public class AruodasTest {
        /* WebElement resultText = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/a/span[2]"));
         Assert.assertEquals(resultText.getText(), "Mano aruodas");*/
         driver.close();
+    }
 
+    @Test //Prisijungimas su valid data
+    public void test2() {
+        driver.get("https://www.aruodas.lt");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("onetrust-reject-all-handler")).click();
+
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div/div[2]/div")).click(); // prisijungti
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("userName")).sendKeys("test@test.com");
+        driver.findElement(By.id("password")).sendKeys("Testing#1");
+        driver.findElement(By.id("loginAruodas")).click();
+
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        WebElement resultText = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/a/span[2]"));
+        Assert.assertEquals(resultText.getText(), "Mano aruodas");
+        driver.close();
     }
 }
