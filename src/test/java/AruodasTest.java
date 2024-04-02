@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class AruodasTest {
     ChromeDriver driver;
@@ -30,7 +31,7 @@ public class AruodasTest {
         StringBuilder email = new StringBuilder();
 
         // Generate username part
-        int usernameLength = random.nextInt(10) + 5; // Random length between 5 to 14 characters
+        int usernameLength = random.nextInt(10) + 8; //
         for (int i = 0; i < usernameLength; i++) {
             String characterSet = characters[random.nextInt(2)]; // Selecting either alphabets or numbers
             char randomChar = characterSet.charAt(random.nextInt(characterSet.length()));
@@ -68,6 +69,40 @@ public class AruodasTest {
     @Test //Registracija su valid data
     public void test1(){
         driver.get("https://www.aruodas.lt");
-        driver.findElement(By.id("omnisend-form-63ff1f31b40d6530aba59a6d-form-close-icon"));
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("onetrust-reject-all-handler")).click();
+
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div/div[2]/div")).click(); // prisijungti
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.xpath("/html/body/div[8]/div/div[10]/div/div/div/div[2]/div[2]/div[1]/a")).click(); // registruotis
+        driver.findElement(By.id("userName")).sendKeys(_email);
+        driver.findElement(By.id("password")).sendKeys(_user);
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.id("registerButton")).click();
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.xpath("/html/body/div[1]/form/button")).click(); // tikrina ar robotas
+
+
+       /* WebElement resultText = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/a/span[2]"));
+        Assert.assertEquals(resultText.getText(), "Mano aruodas");*/
+        driver.close();
+
     }
 }
