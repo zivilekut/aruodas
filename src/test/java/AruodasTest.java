@@ -191,9 +191,35 @@ public class AruodasTest {
         driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[17]/div[1]/span[1]/span/input")).sendKeys("1990"); // statybos metai
         driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[18]/div/div[1]/div[2]")).click(); // mūrinis
         driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[19]/div/div[1]/div[2]")).click(); // įrengtas
+        driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[21]/div/div[1]/label/span")).click(); // centrinis
 
-        driver.findElement(By.id("uploadPhotoBtn")).sendKeys("C:\\Users\\zivil\\Downloads\\kekw.jpg"); // statybos metai
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[42]/div/div[1]/a/input")).sendKeys("C:\\Users\\zivil\\Downloads\\kekw.png"); // foto
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[47]/span[2]/input")).sendKeys("100000"); // kaina
+        driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[48]/span[1]/input")).sendKeys("63111111"); // tel nr
+        driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[49]/span[1]/input")).sendKeys(_email); // email
+        driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[52]/span[1]/div/div/label/span")).click(); // sutikimas
+
+        driver.findElement(By.id("submitFormButton")).click(); // įvesti skelbimą
+
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        WebElement resultText = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div/span"));
+        Assert.assertEquals(resultText.getText(), "Paslaugų paketo pasirinkimas");
+        driver.close();
 
     }
 }
