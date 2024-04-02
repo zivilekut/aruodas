@@ -139,8 +139,9 @@ public class AruodasTest {
         Assert.assertEquals(resultText.getText(), "Mano aruodas");
         driver.close();
     }
+
     @Test // Skelbimo įdėjimas
-    public void test3(){
+    public void test3() {
         driver.get("https://www.aruodas.lt");
         try {
             TimeUnit.SECONDS.sleep(2);
@@ -192,7 +193,6 @@ public class AruodasTest {
         driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[19]/div/div[1]/div[2]")).click(); // įrengtas
 
         driver.findElement(By.id("uploadPhotoBtn")).sendKeys("C:\\Users\\zivil\\Downloads\\kekw.jpg"); // statybos metai
-
 
 
     }
