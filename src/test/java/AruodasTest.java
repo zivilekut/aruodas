@@ -444,5 +444,67 @@ public class AruodasTest {
 
         WebElement resultText2 = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/form/div/div[2]/div/div/div/div/b"));
         Assert.assertEquals(resultText2.getText(), "Čia matysite savo paieškas");
+        driver.close();
+    }
+
+    @Test
+    public void test9() {
+        driver.get("https://www.aruodas.lt");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("onetrust-reject-all-handler")).click();
+        driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/p/a[1]")).click(); //kainų statistika
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("objectSelect")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[2]/td[2]/select/option[2]")).click(); //butai pardavimui
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[3]/td[2]/select")).click(); //Savivaldybė
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[3]/td[2]/select/option[2]")).click(); //Vilnius
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[9]/td[2]/input")).click(); //Palyginti
+
+        driver.findElement(By.id("objectSelect1")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[2]/td[2]/select/option[2]")).click(); //butai pardavimui
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[3]/td[3]/select")).click(); //Savivaldybė
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[3]/td[3]/select/option[3]")).click(); //Kaunas
+
+        //datų pasirinkimas nuo
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[12]/td[2]/select[1]")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[12]/td[2]/select[1]/option[2]")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[12]/td[2]/select[2]")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[12]/td[2]/select[2]/option[1]")).click();
+        //datų pasirinkimas iki
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[12]/td[2]/select[3]")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[12]/td[2]/select[3]/option[2]")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[12]/td[2]/select[4]")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[12]/td[2]/select[4]/option[12]")).click();
+
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[12]/td[3]/div/input")).click(); //rodyti
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("userName")).sendKeys("test@test.com");
+        driver.findElement(By.id("password")).sendKeys("Testing#1");
+        driver.findElement(By.id("loginAruodas")).click();
+
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        WebElement resultText2 = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div/form/table/tbody/tr[1]/td/h1"));
+        Assert.assertEquals(resultText2.getText(), "Nekilnojamojo turto kainų statistika (€)");
+        driver.close();
     }
 }
