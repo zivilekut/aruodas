@@ -370,4 +370,40 @@ public class AruodasTest {
         }
         driver.close();
     }
+
+    @Test //Peržiūrėti ir filtruoti visus naujus projektus
+    public void test7() {
+        driver.get("https://www.aruodas.lt");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("onetrust-reject-all-handler")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[3]/a")).click(); //žiūrėti visus projektus
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[5]/div/div[1]/div[2]/div[4]/a")).click(); //Klaipėda
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div[3]/div[1]/a/div[3]/div[3]/div")).click(); //Daugiau apie projektą
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        WebElement resultText = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[2]/div"));
+        Assert.assertEquals(resultText.getText(), "Paklauskite vystytojo apie projektą");
+        driver.close();
+    }
 }
