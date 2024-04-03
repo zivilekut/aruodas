@@ -406,4 +406,43 @@ public class AruodasTest {
         Assert.assertEquals(resultText.getText(), "Paklauskite vystytojo apie projektą");
         driver.close();
     }
+
+    @Test
+    public void test8() {
+        driver.get("https://www.aruodas.lt");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("onetrust-reject-all-handler")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div[1]/div[2]")).click(); //LT
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div[1]/div[2]/ul/li[2]/a")).click(); //EN
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        WebElement resultText = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/form/div/div[2]/div/div/div/div/b"));
+        Assert.assertEquals(resultText.getText(), "Here you will find your searches");
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div[1]/div[2]")).click(); //EN
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div[1]/div[2]/ul/li[2]/a")).click(); //LT
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        WebElement resultText2 = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/form/div/div[2]/div/div/div/div/b"));
+        Assert.assertEquals(resultText2.getText(), "Čia matysite savo paieškas");
+    }
 }
