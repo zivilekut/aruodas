@@ -407,7 +407,7 @@ public class AruodasTest {
         driver.close();
     }
 
-    @Test
+    @Test //Kalbos pakeitimas į anglų ir po to atkeitimas į lietuvių
     public void test8() {
         driver.get("https://www.aruodas.lt");
         try {
@@ -447,7 +447,7 @@ public class AruodasTest {
         driver.close();
     }
 
-    @Test
+    @Test //Butų kainų statistika (Vilnius-Kaunas)
     public void test9() {
         driver.get("https://www.aruodas.lt");
         try {
