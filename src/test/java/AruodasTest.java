@@ -313,4 +313,61 @@ public class AruodasTest {
         Assert.assertEquals(resultText.getText(), "Ispanija");
         driver.close();
     }
+
+    @Test //NT specialistų siūlomų objektų paieška
+    public void test6() {
+        driver.get("https://www.aruodas.lt");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("onetrust-reject-all-handler")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[2]/ul/li[4]/a")).click(); //NT specialistai
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("display_obj")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/div/div/div[1]/div/div/div/div/ul/li[9]/label")).click(); //sodybos
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("display_FRegion")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/div/div/div[2]/div/div/div/div/ul/li[8]/label")).click(); //Palanga
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div[1]/div/div[4]/div[2]/div/div[1]/ul/li[1]/a")).click(); //2, namai pardavimui
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/div[2]/table/thead/tr/th[1]/label[1]/select")).click(); //išrikiuoti
+        driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/div[2]/table/thead/tr/th[1]/label[1]/select/option[4]")).click(); //brangesni viršuje
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/div[2]/div[1]/a[1]/div")).click(); //atsidaryti brangiausią
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.close();
+    }
 }
