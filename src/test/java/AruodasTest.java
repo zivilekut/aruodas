@@ -269,4 +269,48 @@ public class AruodasTest {
         Assert.assertEquals(resultText.getText(), "Sklypas pardavimui Marijampolėje");
         driver.close();
     }
+
+    @Test //Užsienio objektų paieška
+    public void test5() {
+        driver.get("https://www.aruodas.lt");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("onetrust-reject-all-handler")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[3]/div/ul/li[3]/a")).click(); //užsienio objectai
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("display_object_type")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/div/div/div[1]/div/div/div/div/ul/li[1]/label")).click(); // butai pardavimui
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("display_country")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/div/div/div[2]/div/div/div/div/ul/li[4]/label")).click(); // Ispanija
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div[2]/div[1]/a/div[2]/h2")).click(); // pirmas skelbimas
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        WebElement resultText = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div[3]/div[5]/div/div[2]/div[2]"));
+        Assert.assertEquals(resultText.getText(), "Ispanija");
+        driver.close();
+    }
 }
