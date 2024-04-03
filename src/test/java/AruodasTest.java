@@ -220,6 +220,53 @@ public class AruodasTest {
         WebElement resultText = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div/span"));
         Assert.assertEquals(resultText.getText(), "Paslaugų paketo pasirinkimas");
         driver.close();
+    }
 
+    @Test // Detalioji paieška
+    public void test4() {
+        driver.get("https://www.aruodas.lt");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("onetrust-reject-all-handler")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/form/div/div[1]/div/div[4]/div[3]/div[2]/label/span[1]")).click(); // detalioji paieška
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.id("display_text_obj")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/form/div/div[1]/div/div[1]/div[1]/div[1]/div/div/div/div/ul/li[8]/label")).click(); // sklypai
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.findElement(By.id("display_FRegion")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/form/div/div[1]/div/div[1]/div[1]/div[2]/div/div/div/div/ul/li[31]/label")).click(); // Marijampolės sav.
+
+        driver.findElement(By.id("input_FAreaOverAllMin")).sendKeys("10");
+        driver.findElement(By.id("input_FPriceMax")).sendKeys("30000");
+        driver.findElement(By.id("input_FSpecial_3")).click(); //vanduo
+        driver.findElement(By.id("input_FOwnerDbId0")).click(); //Iš privačių asmenų
+        driver.findElement(By.id("input_FOwnerDbId2")).click(); //Iš Iš agentūrų
+
+        driver.findElement(By.id("display_text_FOrder")).click(); //rūšiavimas
+        driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[4]/div/form/div/div[1]/div/div[4]/div[1]/div/div/div/div/ul/li[3]/label")).click(); // pigesni viršuje
+
+        driver.findElement(By.id("buttonSearchForm")).click(); //ieškoti
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        WebElement resultText = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div[1]/div[5]/div/div[1]/h1/span[1]"));
+        Assert.assertEquals(resultText.getText(), "Sklypas pardavimui Marijampolėje");
+        driver.close();
     }
 }
