@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 public class NewTest {
     ChromeDriver _globalDriver;
@@ -38,7 +39,37 @@ public class NewTest {
         } catch (NoSuchElementException e) {
             snoozeUntilPresence(By.xpath("//*[@id=\"regionDropdown\"]/li[63]")).click();
         }
+    }
 
+    public void selectSettlement(String settlement) {
+
+        snoozeUntilPresence(By.xpath("//*[@id=\"district\"]/span")).click(); //wait and click on settlement dropdown
+
+        // Wait for the settlement options to appear based on the selected municipality
+        WebDriverWait wait = new WebDriverWait(_globalDriver, Duration.ofSeconds(30));
+        List<WebElement> settlementOptions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//ul[@id=\"district\"]//li")));
+
+        // Find the option that matches the provided settlement name
+        WebElement selectedSettlementOption = null;
+        for (WebElement option : settlementOptions) {
+            if (option.getText().equals(settlement)) {
+                selectedSettlementOption = option;
+                break;
+            }
+        }
+
+        // If the settlement option is found, get its data-value attribute
+        if (selectedSettlementOption != null) {
+            String districtId = selectedSettlementOption.getAttribute("data-value");
+            // Construct the XPath for the settlement option using the districtId
+            String settlementXPath = String.format("//*[@id=\"districts_%s\"]/li[1]", districtId);
+
+            // Click on the settlement option
+            WebElement settlementOption = snoozeUntilPresence(By.xpath(settlementXPath));
+            settlementOption.click();
+        } else {
+            System.out.println("Settlement '" + settlement + "' not found in the options.");
+        }
     }
 
     @BeforeTest
@@ -54,5 +85,7 @@ public class NewTest {
     @Test //siauliai - zaliukiu k - danes g
     public void test1() {
         selectMunicipality("Šiauliai");
+        selectSettlement("Žaliūkių k.");
+
     }
 }
