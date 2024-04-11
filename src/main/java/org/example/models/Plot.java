@@ -1,7 +1,6 @@
 package org.example.models;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -9,13 +8,10 @@ import java.util.List;
 public class Plot {
     String region;
     String district;
-
     String quartal;
-
     String street;
     String addressNo;
     String rcNo;
-
 
     public Plot(String region, String district, String quartal, String street, String addressNo, String rcNo) {
         this.region = region.toLowerCase();
@@ -63,7 +59,7 @@ public class Plot {
     }
 
     public void fillQuartal() {
-        if (Utils._globalDriver.findElement(By.id("quartalField")).getAttribute("class").contains("hide")){
+        if (Utils._globalDriver.findElement(By.id("quartalField")).getAttribute("class").contains("hide")) {
             return;
         }
         Utils._globalDriver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[5]/span[1]/span[2]")).click();
@@ -77,7 +73,7 @@ public class Plot {
     }
 
     public void fillStreet() {
-        if (Utils._globalDriver.findElement(By.id("streetField")).getAttribute("class").contains("field-disabled")){
+        if (Utils._globalDriver.findElement(By.id("streetField")).getAttribute("class").contains("field-disabled")) {
             return;
         }
         Utils._globalDriver.findElement(By.xpath("//*[@id=\"streetField\"]/span[1]/span[2]")).click();

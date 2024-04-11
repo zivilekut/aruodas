@@ -3,7 +3,6 @@ import org.example.models.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -33,6 +32,6 @@ public class PlotsTests {
     public void test1() {
         Plot plot = new Plot("Vilnius", "Bajorų", "Antakalnis", "A. Goštauto g.", "14", "12345678");
         plot.fillAd();
-        Assert.assertEquals(true, true);
+        //Assert.assertEquals(true, true);
     }
 }
