@@ -63,15 +63,35 @@ public class Plot {
     }
 
     public void fillQuartal() {
-
+        if (Utils._globalDriver.findElement(By.id("quartalField")).getAttribute("class").contains("hide")){
+            return;
+        }
+        Utils._globalDriver.findElement(By.xpath("/html/body/div[1]/div[2]/form/ul/li[5]/span[1]/span[2]")).click();
+        List<WebElement> quartals = Utils._globalDriver.findElements(By.className("dropdown-input-values-address")).get(2).findElements(By.tagName("li"));
+        for (WebElement quartal : quartals) {
+            if (quartal.getText().toLowerCase().contains(this.quartal)) {
+                quartal.click();
+                break;
+            }
+        }
     }
 
     public void fillStreet() {
-
+        if (Utils._globalDriver.findElement(By.id("streetField")).getAttribute("class").contains("field-disabled")){
+            return;
+        }
+        Utils._globalDriver.findElement(By.xpath("//*[@id=\"streetField\"]/span[1]/span[2]")).click();
+        List<WebElement> streets = Utils._globalDriver.findElements(By.className("dropdown-input-values-address")).get(3).findElements(By.tagName("li"));
+        for (WebElement street : streets) {
+            if (street.getText().toLowerCase().contains(this.street)) {
+                street.click();
+                break;
+            }
+        }
     }
 
     public void fillAddressNo() {
-
+        Utils._globalDriver.findElement(By.name("FHouseNum")).sendKeys(this.addressNo);
     }
 
     public void fillRcNo() {

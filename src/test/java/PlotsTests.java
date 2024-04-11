@@ -31,7 +31,7 @@ public class PlotsTests {
 
     @Test
     public void test1() {
-        Plot plot = new Plot("Vilnius", "Vilniaus m.", "Antakalnis", "A. Goštauto g.", "14", "12345678");
+        Plot plot = new Plot("Vilnius", "Bajorų", "Antakalnis", "A. Goštauto g.", "14", "12345678");
         plot.fillAd();
         Assert.assertEquals(true, true);
     }
